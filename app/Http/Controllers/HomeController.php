@@ -33,15 +33,28 @@ class HomeController extends Controller
 	        ]);
         } else {
             return view('home')->withErrors([
-            	'message' => 'There\'s something wrong with our data.'
+            	'message' => 'There\'s no data match.'
             ]);
         }
     }
 
-    private function list_positions($query = [])
+    public function position($id)
     {
-        $url = 'https://jobs.github.com/positions.json';
-        
+        $detail = $this->list_positions([], 'https://jobs.github.com/positions/'.$id.'.json');
+
+        if (!empty($detail) && is_object($detail)) {
+            return view('detail', [
+                'lowongan' => $detail
+            ]);
+        } else {
+            return redirect(route('home'))->withErrors([
+                'message' => 'Position not found'
+            ]);
+        }
+    }
+
+    private function list_positions($query = [], $url = 'https://jobs.github.com/positions.json')
+    {   
         if (!empty($query)) {
             $url .= '?'.http_build_query($query);
         }

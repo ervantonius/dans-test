@@ -48,7 +48,7 @@
                             <div class="col">
                                 <div class="card">
                                     <div class="card-header">
-                                        <strong>{{ $lowongan->title }}</strong>
+                                        <h5><strong>{{ $lowongan->title }}</strong></h5>
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">
@@ -60,6 +60,9 @@
                                             </p>
                                         </h5>
                                         <p class="card-text text-right"><small class="text-muted">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($lowongan->created_at))->diffForHumans() }}</small></p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <a href="{{ route('positions', $lowongan->id) }}" class="btn btn-primary btn-sm float-right">Detail</a>
                                     </div>
                                 </div>
                             </div>
@@ -80,9 +83,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('scripts')
-<script type="text/javascript">
-</script>
 @endsection
