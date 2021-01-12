@@ -42,7 +42,7 @@
                                         <b>How to Apply :</b>
                                         @guest
                                             <p>
-                                                Please login to apply
+                                                Please <a href="{{ route('login') }}">login</a> to apply
                                             </p>
                                         @else
                                             {!! $lowongan->how_to_apply !!}
